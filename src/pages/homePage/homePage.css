@@ -1,0 +1,160 @@
+.background {
+  background-image: url("../../assets/homePageBackground.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: calc(100vh - 180px);
+  display: flex;
+  flex-direction: column;
+}
+.gray-line {
+  background: linear-gradient(to top, rgba(128, 128, 128, 0.244), #dddddd);
+  /* background-color: rgba(128, 128, 128, 0.244); */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 180px;
+  margin-top: 0;
+  text-align: center;
+}
+img {
+  width: 143px;
+  height: 202px;
+  margin-top: 40px;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 50% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+.welcome {
+  margin-top: 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loading-spinner {
+  position: relative;
+  top: 0;
+}
+h1 {
+  font-size: 50px;
+}
+.item-container {
+  z-index: 0;
+  position: relative;
+  width: 160px;
+  height: 90px;
+  font-size: 27px;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  top: 140px;
+}
+
+.flex-item {
+  margin: 1.8em;
+  margin-top: 0;
+}
+.item-btn {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+}
+.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  border-radius: 10px;
+  top: 100%;
+  right: 50;
+  background-color: #fff;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: none;
+  width: 85%;
+  margin-bottom: 20px;
+  animation: growOut 200ms ease-in-out forwards;
+  transform-origin: top center;
+}
+@keyframes growOut {
+  0% {
+    transform: scale(0);
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.item-container:hover .dropdown-menu {
+  display: block;
+}
+.mahlaka-item {
+  cursor: pointer;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+li:hover {
+  background: #f0f0f0;
+}
+.text {
+  width: 100%;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  position: relative;
+  top: 110px;
+}
+
+.btns {
+  margin: 1.8em;
+  margin-top: 0;
+  width: 190px;
+  height: 110px;
+  border: none;
+  border-radius: 20px;
+  font-size: 27px;
+  cursor: pointer;
+  color: white;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ploga-btns:hover {
+  opacity: 0.8;
+}

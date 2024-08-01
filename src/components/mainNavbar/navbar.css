@@ -1,0 +1,22 @@
+.main-navbar {
+  background-color: var(--main-background-color);
+  min-height: 100px;
+}
+.navbar-collapse {
+  margin-left: 6rem !important;
+
+  justify-content: center;
+}
+
+.navbar-brand {
+  font-size: 40px !important;
+  font-weight: 700;
+  color: white !important;
+  text-decoration: none;
+}
+.navbar .navbar-brand:hover {
+  opacity: 0.8;
+}
+.navbar a.nav-link {
+  color: white;
+}

@@ -1,0 +1,379 @@
+{
+  "plugaBtns": [
+    {
+      "label": "הפתק",
+      "color": "rgb(115 169 51)",
+      "mahlakot": [
+        {
+          "label": "roip",
+          "baseRoute": "roip"
+        },
+        {
+          "label": "חוזי",
+          "baseRoute": "hozi"
+        },
+        {
+          "label": "תשתיות",
+          "baseRoute": "tashtiot"
+        }
+      ]
+    },
+    {
+      "label": "ת. מטכל",
+      "color": "rgb(66 112 171)",
+      "mahlakot": [
+        {
+          "label": "טכנאים",
+          "baseRoute": "technaim"
+        },
+        {
+          "label": "מבחר",
+          "baseRoute": "mavhar"
+        },
+        {
+          "label": "טכני",
+          "baseRoute": "techni"
+        },
+        {
+          "label": "אדום",
+          "baseRoute": "red"
+        }
+      ]
+    },
+    {
+      "label": "אגם",
+      "baseRoute": "agam",
+      "color": "#cc2727",
+      "type": "button"
+    },
+
+    {
+      "label": "שוב",
+      "color": "#4EADAF",
+      "mahlakot": [
+        {
+          "label": "pc",
+          "baseRoute": "pc"
+        },
+        {
+          "label": "vc",
+          "baseRoute": "vc"
+        },
+        {
+          "label": "תקנ\"ם",
+          "baseRoute": "taknam"
+        }
+      ]
+    }
+  ],
+
+  "mahlakot": [
+    {
+      "Title": "pc",
+      "Id": 1,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        },
+        {
+          "Title": "exam3",
+          "subject": "בוחן 3"
+        },
+        {
+          "Title": "exam4",
+          "subject": "בוחן 4"
+        },
+        {
+          "Title": "finalTest",
+          "subject": "המבחן הסופי"
+        }
+      ]
+    },
+    {
+      "Title": "vc",
+      "Id": 2,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "system",
+      "Id": 3,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "vip",
+      "Id": 4,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "תקנם",
+      "Id": 5,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "אגם",
+      "Id": 6,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "טכנאים",
+      "Id": 7,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "מבחר",
+      "Id": 8,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "טכני",
+      "Id": 9,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "אדום",
+      "Id": 10,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "roip",
+      "Id": 11
+    },
+    {
+      "Title": "חוזי",
+      "Id": 12,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    },
+    {
+      "Title": "תשתיות",
+      "Id": 13,
+      "testsNames": [
+        {
+          "Title": "exam1",
+          "subject": "בוחן 1"
+        },
+        {
+          "Title": "exam2",
+          "subject": "בוחן 2"
+        }
+      ]
+    }
+  ],
+
+  "weeks": [
+    {
+      "Title": "שבוע 1",
+      "Id": 1,
+      "weekNum": 1,
+      "mahlakaId": 1
+    },
+    {
+      "Title": "שבוע 2",
+      "Id": 2,
+      "weekNum": 2,
+      "mahlakaId": 1
+    },
+    {
+      "Title": "שבוע 3",
+      "Id": 3,
+      "weekNum": 3,
+      "mahlakaId": 1
+    },
+    {
+      "Title": "שבוע 4",
+      "Id": 4,
+      "weekNum": 4,
+      "mahlakaId": 1
+    },
+    {
+      "Title": "שבוע 5",
+      "Id": 5,
+      "weekNum": 5,
+      "mahlakaId": 1
+    },
+    {
+      "Title": "שבוע 1",
+      "Id": 6,
+      "weekNum": 1,
+      "mahlakaId": 2
+    },
+    {
+      "Title": "שבוע 2",
+      "Id": 7,
+      "weekNum": 2,
+      "mahlakaId": 2
+    }
+  ],
+
+  "lessons": [
+    {
+      "routeName": "aboutThePloga",
+      "Title": "שיעור חפיפה 1",
+      "description": "הכרת הגדוד",
+      "Id": 1,
+      "weekId": 1,
+      "Img": "printer.jpg",
+      "file": "sdsd.pptx",
+      "mahlakaId": 1
+    },
+    {
+      "routeName": "CMD",
+      "Title": "שיעור חפיפה 2",
+      "description": "חומרה ומחשבים",
+      "Id": 2,
+      "weekId": 1,
+      "Img": "CMD.png",
+      "file": "",
+      "mahlakaId": 1
+    },
+    {
+      "routeName": "pcOperation",
+      "Title": "שיעור חפיפה 3",
+      "description": "ממשקים במחשב",
+      "Id": 3,
+      "weekId": 1,
+      "Img": "pc.jpg",
+      "numOfQue": "10",
+      "file": "",
+      "mahlakaId": 1
+    },
+    {
+      "routeName": "hardware&bios",
+      "Title": "שיעור חפיפה 4",
+      "description": "דומיין ותפעול מחשב",
+      "Id": 4,
+      "weekId": 2,
+      "Img": "pc.jpg",
+      "numOfQue": "10",
+      "file": "",
+      "mahlakaId": 1
+    },
+    {
+      "routeName": "discs",
+      "Title": "שיעור חפיפה 5",
+      "description": "תקשורת",
+      "Id": 5,
+      "weekId": 2,
+      "Img": "disc.png",
+      "numOfQue": "10",
+      "file": "",
+      "mahlakaId": 1
+    },
+    {
+      "routeName": "aaaa",
+      "Title": "שיעור חפיפה 1",
+      "description": "ddddaddad",
+      "Id": 6,
+      "weekId": 6,
+      "Img": "pc.jpg",
+      "numOfQue": "10",
+      "file": "",
+      "mahlakaId": 2
+    },
+    {
+      "routeName": "bbbb",
+      "Title": "שיעור חפיפה 2",
+      "description": "sdffdfdf",
+      "Id": 7,
+      "weekId": 7,
+      "Img": "disc.png",
+      "numOfQue": "10",
+      "file": "",
+      "mahlakaId": 2
+    }
+  ]
+}

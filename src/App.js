@@ -1,25 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-function App() {
+import HomePage from "./pages/homePage/homePage";
+import UserPage from "./pages/UsersPage/mainUserPage";
+import StudyMeteriasPage from "./pages/studyMeterials/week&lessons";
+import Navbar from "./components/mainNavbar/navbar";
+import NotFound from "./pages/NotFound";
+
+const RouteLogger = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log("Current route is:", location.pathname);
+  }, [location]);
+
+  return null;
+};
+
+const App = () => {
+  const [basePath, setBasePath] = useState("");
+
+  useEffect(() => {
+    const savedBasePath = localStorage.getItem("basePath") || "";
+    setBasePath(savedBasePath);
+  }, []);
+
+  useEffect(() => {
+    // Save basePath to local storage when it changes
+    localStorage.setItem("basePath", basePath);
+  }, [basePath]);
+
+  const location = useLocation();
+  const hideNavbarPaths = ["/", "/home", "/NotFound"];
+
+  const shouldRenderNavbar = !hideNavbarPaths.includes(location.pathname);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      {shouldRenderNavbar && <Navbar />}
 
-export default App;
+      <RouteLogger />
+      <Routes>
+        <Route index element={<HomePage setBasePath={setBasePath} />} />
+        <Route path="/home" element={<HomePage setBasePath={setBasePath} />} />
+        <Route path={`/${basePath}/UserPage`} element={<UserPage />} />
+        <Route
+          path={`/${basePath}/studyMeterials`}
+          element={<StudyMeteriasPage />}
+        />
+
+        {/* //not found routes */}
+        <Route path={`/${basePath}/*`} element={<Navigate to="/NotFound" />} />
+        <Route path="/NotFound" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
+
+const MainApp = () => (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+export default MainApp;
