@@ -25,21 +25,19 @@ const HomePageContent = ({ setBasePath }) => {
   };
 
   const checkIfMahlakot = (name) => {
-    const check = data.endpoint2?.filter(
+    const check = data.mahlakot?.filter(
       (mahlaka) => mahlaka.plugaName === name
     );
     return check?.length < 2;
   };
 
   const filteredMahlakot = (name) => {
-    return (
-      data.endpoint2?.filter((mahlaka) => mahlaka.plugaName === name) || []
-    );
+    return data.mahlakot?.filter((mahlaka) => mahlaka.plugaName === name) || [];
   };
 
   const handleNewData = () => {
     const newData = { Title: "dfdfdf", color: "yellow" };
-    postData("endpoint1", "/api/plugot", newData);
+    postData("plugot", "/api/plugot", newData);
     setNewData(newData);
   };
 
@@ -59,8 +57,8 @@ const HomePageContent = ({ setBasePath }) => {
 
         <div className="flex">
           <button onClick={handleNewData}>הוסף פלוגה</button>
-          {data.endpoint1 &&
-            data.endpoint1.map((pluga, index) => (
+          {data.plugot &&
+            data.plugot.map((pluga, index) => (
               <div className="flex-item" key={pluga._id}>
                 <div
                   onMouseOver={() => setShowDropdown(index)}
@@ -104,8 +102,8 @@ const HomePageContent = ({ setBasePath }) => {
 
 const HomePage = ({ setBasePath }) => {
   const endpoints = {
-    endpoint1: "/api/plugot",
-    endpoint2: "/api/mahlakot",
+    plugot: "/api/plugot",
+    mahlakot: "/api/mahlakot",
   };
 
   return (
