@@ -14,7 +14,7 @@ const mahlakotSchema = new Schema(
     },
     plugaName: {
       type: String,
-      required: false,
+      required: true,
     },
   },
 

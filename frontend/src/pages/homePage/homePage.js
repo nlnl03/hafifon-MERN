@@ -1,86 +1,46 @@
 import "./homePage.css";
 import imageSrc from "../../assets/383.png";
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import {
+  DataProvider,
+  DataContext,
+} from "../../handleDataChange/context&provider";
 
-const HomePage = ({ setBasePath }) => {
-  const [mahlakot, setMahlakot] = useState([]);
-  const [plugot, setPlugot] = useState([]);
-  const [plugotFiltered, setPlugotFiltered] = useState([]);
+const HomePageContent = ({ setBasePath }) => {
+  const { data, postData } = useContext(DataContext);
+  const [newData, setNewData] = useState({});
   const [showDropdown, setShowDropdown] = useState(null);
-
-  useEffect(() => {
-    const fetchPlugaDetails = async () => {
-      try {
-        const plugotRes = await axios.get("/api/plugot");
-        const plugot = plugotRes.data;
-        console.log("plugot details: ", plugot);
-        setPlugot(plugot);
-
-        if (plugot.length > 0) {
-          const mahlakotRes = await axios.get("/api/mahlakot");
-          const mahlakot = mahlakotRes.data;
-          console.log("mahlakot details: ", mahlakot);
-          setMahlakot(mahlakot);
-        }
-      } catch (error) {
-        throw error;
-      }
-    };
-    fetchPlugaDetails();
-  }, []);
-
   const navigate = useNavigate();
 
-  const handleLinkClick = (basePath) => {
+  const handleLinkClick = (mahlaka) => {
+    const basePath = mahlaka.Title;
+    const mahlakaId = mahlaka?._id;
+    const testsNames = mahlaka?.testsNames;
+    localStorage.setItem("mahlakaId", mahlakaId);
+    localStorage.setItem("testsNames", testsNames);
     localStorage.setItem("mahlaka", basePath);
     setBasePath(basePath);
     navigate(`/${basePath}/UserPage`);
   };
 
-  const checkIfMahlakot = (pluga) => {
-    const check = mahlakot.filter(
-      (mahlaka) => mahlaka.plugaName == pluga.Title
+  const checkIfMahlakot = (name) => {
+    const check = data.endpoint2?.filter(
+      (mahlaka) => mahlaka.plugaName === name
     );
-    if (check < 1) {
-      return true;
-    }
+    return check?.length < 2;
   };
 
-  const btnClick = async (mahlaka, bgColor) => {
-    localStorage.setItem("bgColor", bgColor);
-    document.documentElement.style.setProperty(
-      "--main-background-color",
-      bgColor
+  const filteredMahlakot = (name) => {
+    return (
+      data.endpoint2?.filter((mahlaka) => mahlaka.plugaName === name) || []
     );
+  };
 
-    // Dispatch selectItem action
-    // this.$store.dispatch("selectItem", mahlaka);
-    // Assuming you have a similar Redux or Context action in React
-
-    const url =
-      process.env.NODE_ENV === "development"
-        ? `http://localhost:5000/mahlakot?Title=${mahlaka}`
-        : `getByTitle('mahlakot')/items?$filter=Title eq '${mahlaka}'`;
-
-    try {
-      const res = await axios.get(url);
-      console.log("mahlakot: ", res.data[0]);
-      const mahlakaId = res.data[0]?.Id || res.data.value[0]?.Id;
-      const testsNames =
-        res.data[0]?.testsNames ||
-        JSON.stringify(res.data.value[0]?.testsNames);
-
-      localStorage.setItem("mahlakaId", mahlakaId);
-      localStorage.setItem("testsNames", testsNames);
-
-      // Navigate to User page
-      // this.$router.push({ name: "User" });
-      // Use React Router's useHistory hook or similar to navigate
-    } catch (error) {
-      console.error("Error fetching mahlakot data:", error);
-    }
+  const handleNewData = () => {
+    const newData = { Title: "dfdfdf", color: "yellow" };
+    postData("endpoint1", "/api/plugot", newData);
+    setNewData(newData);
   };
 
   return (
@@ -98,45 +58,60 @@ const HomePage = ({ setBasePath }) => {
         </div>
 
         <div className="flex">
-          {plugot.map((pluga, index) => (
-            <div className="flex-item" key={pluga._id}>
-              <div
-                onMouseOver={() => setShowDropdown(index)}
-                onMouseLeave={() => setShowDropdown(null)}
-                className="item-container"
-              >
-                {checkIfMahlakot(pluga) ? (
-                  <button
-                    className="item-btn"
-                    onClick={() => handleLinkClick(pluga.baseRoute)}
-                  >
-                    {pluga.Title}
-                  </button>
-                ) : (
-                  <span className="item">{pluga.Title}</span>
-                )}
-
-                {/* {showDropdown === index && !pluga.type && (
-                  <div className="dropdown-menu">
-                    <ul>
-                      {pluga.mahlakot.map((mahlaka) => (
-                        <li
-                          key={mahlaka.label}
-                          className="mahlaka-item"
-                          onClick={() => handleLinkClick(mahlaka.baseRoute)}
-                        >
-                          {mahlaka.label}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )} */}
+          <button onClick={handleNewData}>הוסף פלוגה</button>
+          {data.endpoint1 &&
+            data.endpoint1.map((pluga, index) => (
+              <div className="flex-item" key={pluga._id}>
+                <div
+                  onMouseOver={() => setShowDropdown(index)}
+                  onMouseLeave={() => setShowDropdown(null)}
+                  className="item-container"
+                  style={{ backgroundColor: pluga.color }}
+                >
+                  {checkIfMahlakot(pluga.Title) ? (
+                    <button
+                      className="item-btn"
+                      onClick={() => handleLinkClick(pluga)}
+                    >
+                      {pluga.Title}
+                    </button>
+                  ) : (
+                    <>
+                      <span className="item">{pluga.Title}</span>
+                      <div className="dropdown-menu">
+                        <ul>
+                          {filteredMahlakot(pluga.Title).map((mahlaka) => (
+                            <li
+                              key={mahlaka.Title}
+                              className="mahlaka-item"
+                              onClick={() => handleLinkClick(mahlaka)}
+                            >
+                              {mahlaka.Title}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </>
+  );
+};
+
+const HomePage = ({ setBasePath }) => {
+  const endpoints = {
+    endpoint1: "/api/plugot",
+    endpoint2: "/api/mahlakot",
+  };
+
+  return (
+    <DataProvider endpoints={endpoints}>
+      <HomePageContent setBasePath={setBasePath} />
+    </DataProvider>
   );
 };
 

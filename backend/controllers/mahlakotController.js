@@ -26,11 +26,11 @@ const getMahlaka = async (req, res) => {
 
 //create new
 const createMahlaka = async (req, res) => {
-  const { Title, testsNames } = req.body;
+  const { Title, testsNames, plugaName } = req.body;
 
   //add doc to db
   try {
-    const mahlaka = await Mahlaka.create({ Title, testsNames });
+    const mahlaka = await Mahlaka.create({ Title, testsNames, plugaName });
     res.status(200).json(mahlaka);
   } catch (error) {
     res.status(400).json({ error: error.message });
