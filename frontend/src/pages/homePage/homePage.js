@@ -1,17 +1,32 @@
 import "./homePage.css";
 import imageSrc from "../../assets/383.png";
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  DataProvider,
-  DataContext,
-} from "../../handleDataChange/context&provider";
+import axios from "axios";
+// import {
+//   DataProvider,
+//   DataContext,
+// } from "../../handleDataChange/context&provider";
 
 const HomePageContent = ({ setBasePath }) => {
-  const { data, postData } = useContext(DataContext);
+  const [plugot, setPlugot] = useState([]);
   const [newData, setNewData] = useState({});
   const [showDropdown, setShowDropdown] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAllPlugot = async () => {
+      try {
+        const res = await axios.get("/api/plugot");
+        console.log("plugot ", res.data);
+        setPlugot(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAllPlugot();
+  }, []);
 
   const handleLinkClick = (mahlaka) => {
     const basePath = mahlaka.Title;
@@ -25,21 +40,23 @@ const HomePageContent = ({ setBasePath }) => {
   };
 
   const checkIfMahlakot = (name) => {
-    const check = data.mahlakot?.filter(
+    const check = plugot.mahlakot?.filter(
       (mahlaka) => mahlaka.plugaName === name
     );
     return check?.length < 2;
   };
 
   const filteredMahlakot = (name) => {
-    return data.mahlakot?.filter((mahlaka) => mahlaka.plugaName === name) || [];
+    return (
+      plugot.mahlakot?.filter((mahlaka) => mahlaka.plugaName === name) || []
+    );
   };
 
-  const handleNewData = () => {
-    const newData = { Title: "dfdfdf", color: "yellow" };
-    postData("plugot", "/api/plugot", newData);
-    setNewData(newData);
-  };
+  // const handleNewData = () => {
+  //   const newData = { Title: "dfdfdf", color: "yellow" };
+  //   postData("plugot", "/api/plugot", newData);
+  //   setNewData(newData);
+  // };
 
   return (
     <>
@@ -56,9 +73,9 @@ const HomePageContent = ({ setBasePath }) => {
         </div>
 
         <div className="flex">
-          <button onClick={handleNewData}>הוסף פלוגה</button>
-          {data.plugot &&
-            data.plugot.map((pluga, index) => (
+          {/* <button onClick={handleNewData}>הוסף פלוגה</button> */}
+          {plugot &&
+            plugot.map((pluga, index) => (
               <div className="flex-item" key={pluga._id}>
                 <div
                   onMouseOver={() => setShowDropdown(index)}
@@ -101,16 +118,12 @@ const HomePageContent = ({ setBasePath }) => {
 };
 
 const HomePage = ({ setBasePath }) => {
-  const endpoints = {
-    plugot: "/api/plugot",
-    mahlakot: "/api/mahlakot",
-  };
+  // const endpoints = {
+  //   plugot: "/api/plugot",
+  //   mahlakot: "/api/mahlakot",
+  // };
 
-  return (
-    <DataProvider endpoints={endpoints}>
-      <HomePageContent setBasePath={setBasePath} />
-    </DataProvider>
-  );
+  return <HomePageContent setBasePath={setBasePath} />;
 };
 
 export default HomePage;

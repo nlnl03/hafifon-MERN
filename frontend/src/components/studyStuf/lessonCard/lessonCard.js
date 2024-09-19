@@ -2,7 +2,7 @@ import React from "react";
 import "./lessonCard.css";
 import Button from "react-bootstrap/Button";
 
-const lessonCard = (lesson, lessonIndex, weekTitle) => {
+const lessonCard = ({ lesson, lessonIndex, weekTitle }) => {
   return (
     <div className="card-item">
       <div className="card-content">
