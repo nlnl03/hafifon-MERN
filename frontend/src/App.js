@@ -11,7 +11,7 @@ import HomePage from "./pages/homePage/homePage";
 import UserPage from "./pages/UsersPage/mainUserPage";
 import StudyMeteriasPage from "./pages/studyMeterials/week&lessons";
 import Navbar from "./components/mainNavbar/navbar";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFoundPage";
 
 const RouteLogger = () => {
   const location = useLocation();
@@ -57,7 +57,7 @@ const App = () => {
 
         {/* //not found routes */}
         <Route path={`/${basePath}/*`} element={<Navigate to="/NotFound" />} />
-        <Route path="/NotFound" element={<NotFound />} />
+        <Route path="/NotFoundPage" element={<NotFound />} />
       </Routes>
     </>
   );
