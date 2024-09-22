@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import "./Timeline.css";
 import LessonCard from "../lessonCard/lessonCard";
 import axios from "axios";
@@ -21,31 +21,37 @@ const VerticalTimeline = () => {
   }, []);
 
   return (
-    <Container className="mt-5" dir="rtl">
-      <h2 className="text-center mb-5">Course Timeline</h2>
-      {materials.map((week, index) => (
-        <Row key={index} className="timeline-event">
-          <Col md={1} className="timeline-dot-wrapper">
-            <div className="timeline-dot"></div>
-            {index !== materials.length - 1 && (
-              <div className="timeline-line"></div>
-            )}
-          </Col>
-          <Col md={10} className="timeline-content" style={{ width: "unset" }}>
-            <h4>שבוע {week.number}</h4>
-            <div className="flex-row">
-              {week.lessons.map((lesson, lessonIndex) => (
-                <LessonCard
-                  lesson={lesson}
-                  lessonIndex={lessonIndex}
-                  key={lessonIndex}
-                />
-              ))}
-            </div>
-          </Col>
-        </Row>
-      ))}
-    </Container>
+    <>
+      <div className="main-container">
+        <div className="bg"></div>
+        <div className="time-line">
+          <Container className="mt-5" dir="rtl">
+            {materials.map((week, index) => (
+              <Row key={index} className="timeline-event">
+                <Col md={1} className="timeline-dot-wrapper">
+                  <div className="timeline-dot"></div>
+                  {index !== materials.length - 1 && (
+                    <div className="timeline-line"></div>
+                  )}
+                </Col>
+                <Col md={10} className="timeline-content">
+                  <h4>שבוע {week.number}</h4>
+                  <div className="flex-row">
+                    {week.lessons.map((lesson, lessonIndex) => (
+                      <LessonCard
+                        lesson={lesson}
+                        lessonIndex={lessonIndex}
+                        key={lessonIndex}
+                      />
+                    ))}
+                  </div>
+                </Col>
+              </Row>
+            ))}
+          </Container>
+        </div>
+      </div>
+    </>
   );
 };
 

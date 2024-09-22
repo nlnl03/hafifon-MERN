@@ -10,10 +10,10 @@ import axios from "axios";
 
 const HomePageContent = ({ setBasePath }) => {
   const [plugot, setPlugot] = useState([]);
-  const [newData, setNewData] = useState({});
+  // const [newData, setNewData] = useState({});
   const [showDropdown, setShowDropdown] = useState(null);
   const navigate = useNavigate();
-
+  console.log(showDropdown);
   useEffect(() => {
     const fetchAllPlugot = async () => {
       try {

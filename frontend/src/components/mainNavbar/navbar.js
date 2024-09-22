@@ -1,9 +1,10 @@
 import { LinkContainer } from "react-router-bootstrap";
 import Container from "react-bootstrap/Container";
-import React, { useState, useContext } from "react";
+// import React, { useState, useContext } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "./navbar.css";
 import { useLocation } from "react-router-dom";
+import mainIcon from "../../assets/icon4.svg";
 // import {
 //   DataProvider,
 //   DataContext,
@@ -15,21 +16,28 @@ const NavbarFunc = ({ setBasePath }) => {
   const basePath = pathSegments[1];
   // const { data, postData } = useContext(DataContext);
 
-  const endpoints = {
-    examsAndTests: "/api/examsAndTests",
-  };
-
   return (
     <Navbar expand="lg" className="body-tertiary main-navbar" dir="rtl">
       <Container>
-        <LinkContainer to="/">
-          <Navbar.Brand>חפיפה</Navbar.Brand>
+        <LinkContainer to="/" className="brand">
+          <Navbar.Brand className="web-name">
+            <img src={mainIcon} alt="חפיפה" />
+            <h2
+              className="brand-name"
+              style={{
+                marginRight: ".3em",
+                fontWeight: 600,
+              }}
+            >
+              𝗡𝗲𝘁𝗠𝗮𝘀𝘁𝗲𝗿𝘆
+            </h2>
+          </Navbar.Brand>
         </LinkContainer>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav>
             <LinkContainer to={`/${basePath}/studyMeterials`}>
               <Nav.Link>חומרי לימוד</Nav.Link>
             </LinkContainer>
