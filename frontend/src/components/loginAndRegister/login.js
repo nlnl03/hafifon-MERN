@@ -2,14 +2,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Modal, Button } from "react-bootstrap";
 import axios from "axios";
+import "./style.css";
+function LoginModal({ show, handleClose, basePath, setUserData }) {
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-function LoginModal({ show, handleClose, basePath }) {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
-  const [error, setError] = useState("");
   // const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
@@ -18,12 +20,19 @@ function LoginModal({ show, handleClose, basePath }) {
   };
 
   const handleLogin = async (event) => {
+    handleClick();
     event.preventDefault();
 
     try {
-      const { data: res } = await axios.post("/api/users/auth", data);
+      const { data: res } = await axios.post("/api/users/login", data);
       console.log(res.message);
-      localStorage.setItem("token", res.data);
+      localStorage.setItem("authToken", res.token);
+      console.log(res.userName);
+      localStorage.setItem("userName", res.userName);
+
+      const decoded = JSON.parse(atob(res.token.split(".")[1]));
+      setUserData({ token: res.token, roles: decoded.roles });
+
       window.location = `/${basePath}/studyMaterials`;
       handleClose();
     } catch (error) {
@@ -35,10 +44,20 @@ function LoginModal({ show, handleClose, basePath }) {
         setError(error.response.data.message);
       }
     }
+    setLoading(false);
   };
+  const handleClick = () => setLoading(true);
 
   return (
-    <Modal show={show} onHide={handleClose} dir="rtl" centered>
+    <Modal
+      show={show}
+      onHide={() => {
+        handleClose();
+        setError("");
+      }}
+      dir="rtl"
+      centered
+    >
       <Modal.Header className="justify-content-center">
         <Modal.Title>התחברות</Modal.Title>
       </Modal.Header>
@@ -65,14 +84,20 @@ function LoginModal({ show, handleClose, basePath }) {
             />
           </Form.Group>
 
-          {error && <div>{error}</div>}
-
           <Modal.Footer className="justify-content-center">
-            <Button variant="secondary" onClick={handleClose}>
+            {error && <div className="error-msg">{error}</div>}
+
+            <Button
+              variant="secondary"
+              onClick={() => {
+                handleClose();
+                setError("");
+              }}
+            >
               ביטול
             </Button>
-            <Button type="submit" variant="primary">
-              התחבר
+            <Button type="submit" variant="primary" disabled={isLoading}>
+              {isLoading ? "מתחבר…" : "התחבר"}
             </Button>
           </Modal.Footer>
         </Form>

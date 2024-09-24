@@ -10,13 +10,13 @@ const {
   grantPermission,
 } = require("../controllers/examsTestsController");
 
-const { verifyAdmin } = require("../middleware/authMiddleware"); // Middleware to check if user is admin
+const auth = require("../middleware/authMiddleware");
 
-router.get("/", verifyAdmin, getExamsTests);
-router.get("/:id", verifyAdmin, getExamTestById);
-router.post("/", verifyAdmin, createExamTest); // Only admin can create
-router.put("/:id", verifyAdmin, updateExamTest); // Only admin can update
-router.delete("/:id", verifyAdmin, deleteExamTest); // Only admin can delete
-router.post("/grant-permission", verifyAdmin, grantPermission); // Only admin can grant permissions
+router.get("/", auth(["admin"]), getExamsTests);
+router.get("/:id", auth(["admin"]), getExamTestById);
+router.post("/", auth(["admin"]), createExamTest); // Only admin can create
+router.put("/:id", auth(["admin"]), updateExamTest); // Only admin can update
+router.delete("/:id", auth(["admin"]), deleteExamTest); // Only admin can delete
+router.post("/grant-permission", auth(["admin"]), grantPermission); // Only admin can grant permissions
 
 module.exports = router;

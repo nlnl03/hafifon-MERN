@@ -25,11 +25,20 @@ const RouteLogger = () => {
 
 const App = () => {
   const [basePath, setBasePath] = useState("");
+  const [userData, setUserData] = useState({ token: null, roles: [] });
 
   useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      const decoded = JSON.parse(atob(token.split(".")[1]));
+      setUserData({ token, roles: decoded.roles || [] }); // Ensure roles is always an array
+    }
+
     const savedBasePath = localStorage.getItem("basePath") || "";
     setBasePath(savedBasePath);
   }, []);
+
+  const isAuthenticated = !!userData.token; // Boolean if user is authenticated
 
   useEffect(() => {
     // Save basePath to local storage when it changes
@@ -43,7 +52,7 @@ const App = () => {
 
   return (
     <>
-      {shouldRenderNavbar && <Navbar />}
+      {shouldRenderNavbar && <Navbar setUserData={setUserData} />}
 
       <RouteLogger />
       <Routes>
@@ -52,12 +61,18 @@ const App = () => {
         <Route path={`/${basePath}/UserPage`} element={<UserPage />} />
         <Route
           path={`/${basePath}/studyMaterials`}
-          element={<StudyMeteriasPage />}
+          element={
+            isAuthenticated && userData.roles?.includes("admin") ? (
+              <StudyMeteriasPage />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
         />
+        <Route path="/unauthorized" element={<h1>Unauthorized Access</h1>} />
 
         {/* //not found routes */}
-        <Route path={`/${basePath}/*`} element={<Navigate to="/NotFound" />} />
-        <Route path="/NotFoundPage" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </>
   );

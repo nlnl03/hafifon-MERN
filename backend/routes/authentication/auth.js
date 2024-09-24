@@ -7,7 +7,6 @@ const Joi = require("joi");
 
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
     const { error } = validate(req.body);
     if (error) {
       return res.status(400).json({ message: error.details[0].message });
@@ -31,7 +30,11 @@ router.post("/", async (req, res) => {
     }
 
     const token = user.generateAuthToken();
-    res.status(200).json({ data: token, message: "התחברת בהצלחה !" });
+    res.status(200).json({
+      token: token,
+      userName: user.userName,
+      message: "התחברת בהצלחה !",
+    });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
   }

@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 //routes
 
 app.use("/api/users", usersRoutes);
-app.use("/api/users/auth", authRoutes);
+app.use("/api/users/login", authRoutes);
 
 app.use("/api/plugot", plugotRoutes);
 

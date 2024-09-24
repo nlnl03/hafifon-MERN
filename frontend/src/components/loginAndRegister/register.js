@@ -4,8 +4,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import "./style.css";
 
 function RegisterModal({ show, handleClose }) {
+  const [isLoading, setLoading] = useState(false);
+
   const [data, setData] = useState({
     userName: "",
     email: "",
@@ -21,13 +24,14 @@ function RegisterModal({ show, handleClose }) {
   };
 
   const handleRegister = async (event) => {
+    handleClick();
     event.preventDefault();
 
     try {
       const { data: res } = await axios.post("/api/users/register", data);
-
       console.log(res.message);
       handleClose();
+      resetData();
     } catch (error) {
       if (
         error.response &&
@@ -37,10 +41,30 @@ function RegisterModal({ show, handleClose }) {
         setError(error.response.data.message);
       }
     }
+    setLoading(false);
+  };
+
+  const handleClick = () => setLoading(true);
+
+  const resetData = () => {
+    setError("");
+    setData({
+      userName: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
-    <Modal show={show} onHide={handleClose} dir="rtl" centered>
+    <Modal
+      show={show}
+      onHide={() => {
+        handleClose();
+        setError("");
+      }}
+      dir="rtl"
+      centered
+    >
       <Modal.Header className="justify-content-center">
         <Modal.Title>הרשמה</Modal.Title>
       </Modal.Header>
@@ -78,14 +102,20 @@ function RegisterModal({ show, handleClose }) {
             />
           </Form.Group>
 
-          {error && <div>{error}</div>}
-
           <Modal.Footer className="justify-content-center">
-            <Button variant="secondary" onClick={handleClose}>
+            {error && <div className="error-msg">{error}</div>}
+
+            <Button
+              variant="secondary"
+              onClick={() => {
+                handleClose();
+                setError("");
+              }}
+            >
               ביטול
             </Button>
-            <Button type="submit" variant="primary">
-              צור חשבון
+            <Button type="submit" variant="primary" disabled={isLoading}>
+              {isLoading ? "יוצר חשבון..." : "צור חשבון"}
             </Button>
           </Modal.Footer>
         </Form>

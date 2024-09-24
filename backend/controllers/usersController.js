@@ -6,7 +6,6 @@ const { User, validate } = require("../models/usersModel");
 // Register a new user
 const registerUser = async (req, res) => {
   try {
-    console.log(req.body);
     const { error } = validate(req.body);
     if (error) {
       console.log("Validation error:", error.details[0].message);
@@ -27,7 +26,6 @@ const registerUser = async (req, res) => {
     await new User({
       ...req.body,
       password: hashedPassword,
-      userName: "aaaa",
     }).save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {

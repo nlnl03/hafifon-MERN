@@ -9,8 +9,13 @@ const VerticalTimeline = () => {
 
   useEffect(() => {
     const fetchAllStudyingStuf = async () => {
+      const token = localStorage.getItem("authToken");
       try {
-        const res = await axios.get("/api/materials");
+        const res = await axios.get("/api/materials", {
+          headers: {
+            "x-auth-token": token,
+          },
+        });
         console.log("materials: ", res.data);
         setMaterials(res.data);
       } catch (error) {
