@@ -1,4 +1,5 @@
-const Mahlaka = require("../modules/mahlakotModel");
+const Plugot = require("../models/plugotModel");
+const Mahlaka = require("../models/mahlakotModel");
 const mongoose = require("mongoose");
 
 //get all
@@ -27,11 +28,23 @@ const getMahlaka = async (req, res) => {
 //create new
 const createMahlaka = async (req, res) => {
   const { Title, testsNames, plugaName } = req.body;
+  const { plugaId } = req.params;
 
   //add doc to db
   try {
-    const mahlaka = await Mahlaka.create({ Title, testsNames, plugaName });
-    res.status(200).json(mahlaka);
+    const mahlaka = await Mahlaka.create({
+      Title,
+      testsNames,
+      pluga: plugaId,
+    });
+
+    await Plugot.findByIdAndUpdate(
+      plugaId,
+      { $push: { mahlakot: mahlaka._id } }, // Push the new lesson's ID into the lessons array
+      { new: true }
+    );
+
+    res.status(201).json(mahlaka);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

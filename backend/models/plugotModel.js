@@ -12,6 +12,7 @@ const plugotSchema = new Schema(
       type: String,
       required: true,
     },
+    mahlakot: [{ type: Schema.Types.ObjectId, ref: "mahlakot" }],
   },
 
   { timestamps: true }

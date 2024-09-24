@@ -9,23 +9,22 @@ import axios from "axios";
 // } from "../../handleDataChange/context&provider";
 
 const HomePageContent = ({ setBasePath }) => {
-  const [plugot, setPlugot] = useState([]);
+  const [plugotAndMahlakot, setPlugotAndMahlakot] = useState([]);
   // const [newData, setNewData] = useState({});
   const [showDropdown, setShowDropdown] = useState(null);
   const navigate = useNavigate();
-  console.log(showDropdown);
   useEffect(() => {
-    const fetchAllPlugot = async () => {
+    const fetchAllPlugotAndMahlakot = async () => {
       try {
-        const res = await axios.get("/api/plugot");
-        console.log("plugot ", res.data);
-        setPlugot(res.data);
+        const res = await axios.get("/api/plugotWithMahlakot");
+        console.log("plugot&mahlakot ", res.data);
+        setPlugotAndMahlakot(res.data);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchAllPlugot();
+    fetchAllPlugotAndMahlakot();
   }, []);
 
   const handleLinkClick = (mahlaka) => {
@@ -37,19 +36,6 @@ const HomePageContent = ({ setBasePath }) => {
     localStorage.setItem("mahlaka", basePath);
     setBasePath(basePath);
     navigate(`/${basePath}/UserPage`);
-  };
-
-  const checkIfMahlakot = (name) => {
-    const check = plugot.mahlakot?.filter(
-      (mahlaka) => mahlaka.plugaName === name
-    );
-    return check?.length < 2;
-  };
-
-  const filteredMahlakot = (name) => {
-    return (
-      plugot.mahlakot?.filter((mahlaka) => mahlaka.plugaName === name) || []
-    );
   };
 
   // const handleNewData = () => {
@@ -74,8 +60,8 @@ const HomePageContent = ({ setBasePath }) => {
 
         <div className="flex">
           {/* <button onClick={handleNewData}>הוסף פלוגה</button> */}
-          {plugot &&
-            plugot.map((pluga, index) => (
+          {plugotAndMahlakot &&
+            plugotAndMahlakot.map((pluga, index) => (
               <div className="flex-item" key={pluga._id}>
                 <div
                   onMouseOver={() => setShowDropdown(index)}
@@ -83,7 +69,7 @@ const HomePageContent = ({ setBasePath }) => {
                   className="item-container"
                   style={{ backgroundColor: pluga.color }}
                 >
-                  {checkIfMahlakot(pluga.Title) ? (
+                  {pluga.mahlakot.length == 1 ? (
                     <button
                       className="item-btn"
                       onClick={() => handleLinkClick(pluga)}
@@ -95,7 +81,7 @@ const HomePageContent = ({ setBasePath }) => {
                       <span className="item">{pluga.Title}</span>
                       <div className="dropdown-menu">
                         <ul>
-                          {filteredMahlakot(pluga.Title).map((mahlaka) => (
+                          {pluga.mahlakot.map((mahlaka) => (
                             <li
                               key={mahlaka.Title}
                               className="mahlaka-item"

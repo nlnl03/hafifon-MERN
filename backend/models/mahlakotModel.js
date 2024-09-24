@@ -12,10 +12,7 @@ const mahlakotSchema = new Schema(
       type: Array,
       required: true,
     },
-    plugaName: {
-      type: String,
-      required: true,
-    },
+    pluga: { type: Schema.Types.ObjectId, ref: "plugot" }, // Reference to the Week it belongs to
   },
 
   { timestamps: true }

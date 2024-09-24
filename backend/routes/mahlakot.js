@@ -16,7 +16,7 @@ router.get("/:id", getMahlaka);
 
 //POST a new workout
 
-router.post("/", createMahlaka);
+router.post("/:plugaId", createMahlaka);
 
 //DELETE a workout
 

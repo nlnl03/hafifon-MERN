@@ -20,7 +20,6 @@
 
 .time-line {
   position: relative;
-  z-index: 1;
   padding: 100px 20px; /* Adjust padding to prevent overlap with fixed navbar */
 }
 .timeline-event {

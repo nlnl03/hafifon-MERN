@@ -3,9 +3,7 @@ import "../userPageParts/allSides.css";
 function UserPageLeftSide() {
   return (
     <div className="left-side-flex">
-      <div className="spinner">
-        <loadingSpinner />
-      </div>
+      <div className="spinner">{/* <loadingSpinner /> */}</div>
 
       {true &&
         true &

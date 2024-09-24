@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Week = require("../modules/weeksModel"); // Week model
+const Week = require("../models/weeksModel"); // Week model
 
 // Controller function to get a week, its lessons, and the practices
 const getWeekWithLessonsAndPractices = async (req, res) => {

@@ -50,7 +50,10 @@ const App = () => {
         <Route index element={<HomePage setBasePath={setBasePath} />} />
         <Route path="/home" element={<HomePage setBasePath={setBasePath} />} />
         <Route path={`/${basePath}/UserPage`} element={<UserPage />} />
-        <Route path={`/studyMeterials`} element={<StudyMeteriasPage />} />
+        <Route
+          path={`/${basePath}/studyMaterials`}
+          element={<StudyMeteriasPage />}
+        />
 
         {/* //not found routes */}
         <Route path={`/${basePath}/*`} element={<Navigate to="/NotFound" />} />

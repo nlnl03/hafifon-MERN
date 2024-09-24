@@ -23,7 +23,6 @@ const VerticalTimeline = () => {
   return (
     <>
       <div className="main-container">
-        <div className="bg"></div>
         <div className="time-line">
           <Container className="mt-5" dir="rtl">
             {materials.map((week, index) => (

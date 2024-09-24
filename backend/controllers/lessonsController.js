@@ -1,5 +1,5 @@
-const Week = require("../modules/weeksModel");
-const Lesson = require("../modules/lessonsModel");
+const Week = require("../models/weeksModel");
+const Lesson = require("../models/lessonsModel");
 const mongoose = require("mongoose");
 
 //get all

@@ -1,17 +1,18 @@
 .main-navbar {
-  background: linear-gradient(
+  /* background: linear-gradient(
     180deg,
     #292929a5 0%,
     rgba(51, 52, 51, 0.263) 100%
-  );
-  background-color: #c4eced80;
-  opacity: 0.95;
+  ); */
+  background-color: gray;
+  /* opacity: 0.95; */
+  opacity: 1;
   position: fixed !important;
   top: 0;
   left: 0;
   width: 100%;
   top: 0;
-  z-index: 10000;
+  z-index: 1;
   min-height: 110px;
 }
 
@@ -67,6 +68,10 @@ img {
   .container {
     justify-content: center !important;
   }
+  .loginRegister {
+    position: relative !important;
+    width: 152px !important;
+  }
 }
 @media (max-width: 430px) {
   .navbar-toggler {
@@ -81,4 +86,32 @@ img {
     position: relative !important;
     right: 0;
   }
+}
+
+.loginRegister {
+  display: flex;
+  position: absolute;
+  left: 15%;
+  border-radius: 22px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 4px;
+}
+.loginRegister div {
+  border-left: #dedede 1px solid;
+  padding: 3px 12px;
+}
+.loginRegister div:last-of-type {
+  border-left: none;
+}
+.loginRegister button {
+  color: #ffffff;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-family: "Assistant-Medium";
+}
+
+.logged-in-dropdown {
+  position: absolute;
+  left: 5%;
 }

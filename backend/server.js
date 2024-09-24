@@ -4,7 +4,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const mahlakotRoutes = require("./routes/mahlakot");
 const plugotRoutes = require("./routes/plugot");
+const plugotWithMahlakot = require("./routes/allPlugot&MahlakotRoute");
 const usersRoutes = require("./routes/usersRoute");
+const authRoutes = require("./routes/authentication/auth");
 const examsTestsRoutes = require("./routes/examsTestsRoutes");
 const weeksRoutes = require("./routes/weeksRoutes");
 const lessonsRoutes = require("./routes/lessonsRoutes");
@@ -25,10 +27,13 @@ app.use((req, res, next) => {
 //routes
 
 app.use("/api/users", usersRoutes);
+app.use("/api/users/auth", authRoutes);
 
 app.use("/api/plugot", plugotRoutes);
 
 app.use("/api/mahlakot", mahlakotRoutes);
+
+app.use("/api/plugotWithMahlakot", plugotWithMahlakot);
 
 app.use("/api/weeks", weeksRoutes);
 

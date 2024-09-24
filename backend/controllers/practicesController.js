@@ -1,5 +1,5 @@
-const Lesson = require("../modules/lessonsModel");
-const Practice = require("../modules/practicesModel");
+const Lesson = require("../models/lessonsModel");
+const Practice = require("../models/practicesModel");
 const mongoose = require("mongoose");
 
 //get all

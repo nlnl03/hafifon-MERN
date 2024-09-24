@@ -1,5 +1,5 @@
-const ExamTest = require("../modules/examsTestsModel");
-const User = require("../modules/usersModel");
+const ExamTest = require("../models/examsTestsModel");
+const User = require("../models/usersModel");
 
 // Get all exams/tests
 const getExamsTests = async (req, res) => {

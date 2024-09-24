@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../modules/usersModel");
+const User = require("../models/usersModel");
 
 exports.verifyAdmin = async (req, res, next) => {
   const token = req.header("Authorization").replace("Bearer ", "");
